@@ -1,0 +1,14 @@
+version: '2'
+networks:
+  websafety-net:
+    external: true
+services:
+  radius:
+    image: katharostech/freeradius-server
+    volumes:
+     - ./clients.conf:/etc/freeradius/clients.conf
+     - ./authorize:/etc/freeradius/mods-config/files/authorize
+    ports:
+     - 1812-1813:1812-1813/udp
+    networks:
+     - websafety-net
